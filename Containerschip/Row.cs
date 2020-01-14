@@ -19,7 +19,6 @@ namespace Containerschip
         {
             if (PickLowestStackInRow(side).CheckIfContainerCanGoOnTop(container) == true)
             {
-                PickLowestStackInRow(side).containers.Add(container);
                 return true;
             }
             else

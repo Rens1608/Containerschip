@@ -24,6 +24,7 @@ namespace Containerschip
         {
             if(TotalWeightStack() + container.Weight <= 120000)
             {
+                containers.Add(container);
                 return true;
             }
             else
