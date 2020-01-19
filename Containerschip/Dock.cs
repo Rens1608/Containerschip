@@ -9,10 +9,10 @@ namespace Containerschip
     public class Dock
     {
         public List<Container> containers = new List<Container>();
-
+        public Ship ship;
         public string PlaceContainersOnShip(int width, int length)
         {
-            Ship ship = new Ship(width, length);
+            ship = new Ship(width, length);
             ship.CreateDeck();
             while (containers.Any())
             {

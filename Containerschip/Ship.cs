@@ -45,7 +45,7 @@ namespace Containerschip
         {
             foreach (Container container in containers.Where(c => c.Cargo == Cargo.Normal).Reverse())
             {
-                if (GetRowWithLeastContainers().TryToPlaceContainer(container))
+                if (GetRowWithLeastContainers(rows).TryToPlaceContainer(container, PickSideWithLeastWeight()))
                 {
                     containers.Remove(container);
                 }
@@ -54,16 +54,19 @@ namespace Containerschip
 
         public void TryToPlaceValuableContainersInRow(List<Container> containers)
         {
+            List<Row> firstAndLastRow = new List<Row>();
+            firstAndLastRow.Add(rows.First());
+            firstAndLastRow.Add(rows.Last());
             foreach (Container container in containers.Where(c => c.Cargo == Cargo.Valuable).Reverse())
             {
-                if (GetRowWithLeastContainers().TryToPlaceContainer(container,PickSideWithLeastWeight()))
+                if (GetRowWithLeastContainers(firstAndLastRow).TryToPlaceContainer(container,PickSideWithLeastWeight()))
                 {
                     containers.Remove(container);
                 }
             }
         }
 
-        private Row GetRowWithLeastContainers()
+        private Row GetRowWithLeastContainers(List<Row> rows)
         {
             return rows.OrderBy(r => r.TotalContainers()).First();
         }
